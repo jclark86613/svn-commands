@@ -5,17 +5,21 @@ import { Injectable } from '@angular/core';
 })
 export class BranchesService {
 
-  constructor() { }
+    constructor() { }
 
-  public root = 'svn://svn/software/server/';
-  public source = 'trunk';
-  public branch = '[branch-name]';
+    public root = 'svn://svn/software/server/';
+    public source = 'trunk';
+    public branch = '[branch-name]';
 
-  public updateSource ( value ) {
-    this.source = value.replaceAll( ' ', '_' ) || '[source-name]';
-  }
+    public updateSource ( value ) {
+        this.source = this.replaceSpaceWithUnderscore( value ) || 'trunk';
+    }
 
-  public updateBranch ( value ) {
-    this.branch = value.replaceAll( ' ', '_' ) || '[branch-name]';
-  }
+    public updateBranch ( value ) {
+        this.branch = this.replaceSpaceWithUnderscore( value ) || '[branch-name]';
+    }
+
+    private replaceSpaceWithUnderscore( value ) {
+        return value.replaceAll( ' ', '_' );
+    }
 }

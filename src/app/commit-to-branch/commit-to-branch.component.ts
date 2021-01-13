@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { BranchesService } from '../branches/branches.service';
 
@@ -7,13 +7,8 @@ import { BranchesService } from '../branches/branches.service';
   templateUrl: './commit-to-branch.component.html',
   styleUrls: ['./commit-to-branch.component.scss']
 })
-export class CommitToBranchComponent implements OnInit {
-
-  constructor(
-    public branchesService: BranchesService
-  ) { }
-
-  ngOnInit(): void {
-  }
-  
+export class CommitToBranchComponent {
+    constructor(
+        public branchesService: BranchesService
+    ) { }
 }
