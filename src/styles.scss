@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+}
+
+html, body {
+    background-color: #e7e7e7;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-bottom: 0;
+    padding-left: 8px;
+}
+
+.command-list {
+    background-color: orange;
+    padding: 5px;
+}
+
+.artio-compartment {
+    background-color: #282d33;
+    border: 1px solid #e7e7e7;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px #bbb;
+    padding: 10px;
+    color: #7896ae;
+    margin-bottom: 10px;
+}
+/* commands styling */
+.line {
+    margin-bottom: 8px;
+}
+.command {
+    color: #d45a66;
+}
+
+.string {
+    color: #d19050;
+}
+
+.branch {
+    color: #95c86d;
+}

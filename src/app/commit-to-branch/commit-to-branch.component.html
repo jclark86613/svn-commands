@@ -1,0 +1,94 @@
+<h1>Create new branch</h1>
+<div fxLayout="row">
+    <div class="artio-compartment" fxLayout="column">
+        <div class="line">
+            <span class="command">cd</span> ~/sandbox
+        </div>
+        <div class="line">
+            <span class="command">svn copy</span>
+            {{branchesService.root}}{{(branchesService.source === 'trunk' ? '' : 'branches/')}}<span class="branch">{{branchesService.source}}</span>
+            {{branchesService.root}}branches/<span class="branch">{{branchesService.branch}}</span>
+            -m <span class="string">"Creating feature branch for <span class="branch">{{branchesService.branch}}</span>"</span>
+        </div>
+        <div class="line">
+            <span class="command">svn co</span>
+            {{branchesService.root}}branches/<span class="branch">{{branchesService.branch}}</span>
+        </div>
+        <div class="line">
+            <span class="command">cd </span>
+            <span class="branch">{{branchesService.branch}}</span>
+        </div>
+        <div class="line">
+            <span class="command">make configure </span>AVEDIAPRODUCT=avedia-server
+        </div>
+    </div>
+</div>
+
+<h1>Commit working changes to branch</h1>
+<div fxLayout="row">
+    <div class="artio-compartment" fxLayout="column">
+        <div class="line">
+            <span class="command">cd</span> ~/sandbox/<span class="branch">{{branchesService.branch}}</span>
+        </div>
+        <div class="line">
+            <span class="command">svn up</span>
+        </div>
+        <div class="line">
+            <span class="command">svn commit</span> -m <span class="string">"Commit working copy changes back to branch <span class="branch">{{branchesService.branch}}</span>"</span>
+        </div>
+    </div>
+</div>
+
+<h1>Merge trunk into branch</h1>
+<div fxLayout="row">
+    <div class="artio-compartment" fxLayout="column">
+        <div class="line">
+            <span class="command">cd</span> ~/sandbox/<span class="branch">{{branchesService.branch}}</span>
+        </div>
+        <div class="line">
+            <span class="command">svn up</span>
+        </div>
+        <div class="line">
+            <span class="command">svn merge</span> ^/server/{{(branchesService.source === 'trunk' ? '' : 'branches/')}}<span class="branch">{{branchesService.source}}</span>
+        </div>
+        <div class="line">
+            <span class="command">svn commit</span> -m<span class="string"> "Merge current<span class="branch"> {{branchesService.source}}</span> to<span class="branch"> {{branchesService.branch}}</span>"</span>
+        </div>
+    </div>
+</div>
+
+<h1>Reintegrate branch to trunk</h1>
+<div fxLayout="row">
+    <div class="artio-compartment" fxLayout="column">
+        <div class="line">
+            <span class="command">cd</span> ~/sandbox/<span class="branch">{{branchesService.source}}</span>
+        </div>
+        <div class="line">
+            <span class="command">svn up</span>
+        </div>
+        <div class="line">
+            <span class="command">svn revert</span> -R .
+        </div>
+        <div class="line">
+            <span class="command">svn merge</span> --reintegrate ^/server/branches/<span class="branch">{{branchesService.branch}}</span>
+        </div>
+        <div class="line">
+            <span class="command">svn commit</span> -m <span class="string">"Reintegrate <span class="branch">{{branchesService.branch}}</span> to <span class="branch">{{branchesService.source}}</span>"</span>
+        </div>
+    </div>
+</div>
+
+<h1>Delete branch</h1>
+<div fxLayout="row">
+    <div class="artio-compartment" fxLayout="column">
+        <div class="line">
+            <span class="command">cd</span> ~/sandbox
+        </div>
+        <div class="line">
+            <span class="command">rm -rf </span><span class="branch">{{branchesService.branch}}</span>
+        </div>
+        <div class="line">
+            <span class="command">svn delete</span> svn://svn/software/server/branches/<span class="branch">{{branchesService.branch}}</span> -m <span class="string">"Deleting <span class="branch">{{branchesService.branch}}</span>"</span>
+        </div>
+    </div>
+</div>
